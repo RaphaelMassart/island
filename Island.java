@@ -1,11 +1,8 @@
-
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
@@ -66,11 +63,12 @@ public class Island extends JPanel {
 	private Rectangle mainRect, greenRect;
 	private Rectangle rectSupG, rectSupD, rectInfG, rectInfD;
 
-	private int[][] myWorld;
+	//private int[][] myWorld;
 	private int[][] myBorder;
 
 	private int I, J;
 	private int code_brique;
+	private MyWorld monde;
 	
 	public Island()
 	{
@@ -129,7 +127,7 @@ public class Island extends JPanel {
 		frame.setVisible(true);
 		
 
-		myWorld  = new int[largeur][hauteur]; //briques
+		monde  = new MyWorld(largeur, hauteur); //briques
 		myBorder = new int[largeur+1][hauteur+1]; //intersections
 		
 
@@ -286,7 +284,7 @@ public class Island extends JPanel {
 				code_brique +=     3*myBorder[(int)((I + 1)/2)][(int)((J - 1)/2)];
 				code_brique +=       myBorder[(int)((I + 1)/2)][(int)((J + 1)/2)];
 				
-				myWorld[i][j] = code_brique;
+				monde.setMyWorld(i, j, code_brique);
 			}
 	}
 	
@@ -300,10 +298,10 @@ public class Island extends JPanel {
 	public void paint(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D)g;
-		for (int i=0 ; i < myWorld.length ; i++)
-			for (int j=0 ; j < myWorld[0].length ; j++)
+		for (int i=0 ; i < monde.getLength() ; i++)
+			for (int j=0 ; j < monde.getWidth() ; j++)
 			{
-				switch(myWorld[i][j])
+				switch(monde.getUneCase(i, j))
 				{
 					case 0 : 
 						g2.drawImage(sol_0000,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
