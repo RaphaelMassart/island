@@ -1,4 +1,5 @@
 
+
 public class MyWorld{
 	
 	private int largeur;
@@ -19,4 +20,22 @@ public class MyWorld{
 	{
 		return (int) Math.floor(hauteur/2);
 	}
+
+	public void setMyWorld(int x, int y, int value){
+		this.tab[x][y] = value;
+	}
+
+	public int getLength(){
+		return tab.length;
+	}
+
+	public int getWidth(){
+		return tab[0].length;
+	}
+
+	public int getUneCase(int i, int j){
+		return tab[i][j];
+	}
+
+
 }
